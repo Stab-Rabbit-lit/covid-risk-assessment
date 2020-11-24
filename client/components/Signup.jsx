@@ -144,6 +144,22 @@ const Signup = (props) => {
               />
             </InputGroup>
           </FormControl>
+          <FormControl isRequired>
+
+
+<Text mb="8px">Did you get tested for the virus? (Positive, Negative or No test)</Text>
+  <InputGroup>
+
+    <InputLeftAddon children={<Icon name="info" /> } />
+    <Input
+      type="text"
+      placeholder="Positive, Negative or No test"
+      value={positive}
+      onChange={getTest}
+    />
+  </InputGroup>
+
+</FormControl>
           <FormControl>
             <InputGroup mb="15px" borderRadius="8px">
               <InputLeftAddon children={<Icon name="lock" />} />
