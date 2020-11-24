@@ -12,11 +12,12 @@ console.log('inside addUser');
       phoneNumber,
       address,
       zipcode,
+      positive
   } = req.body;
 
-  const addUser = `INSERT INTO users (first_name, last_name, email, password, phone, address, zip)
-  VALUES ($1, $2, $3, $4, $5, $6, $7 ) RETURNING _id`;
-  const values = [firstName, lastName, email, password, phoneNumber, address, zipcode]
+  const addUser = `INSERT INTO users (first_name, last_name, email, password, phone, address, zip, test)
+  VALUES ($1, $2, $3, $4, $5, $6, $7 , $8) RETURNING _id`;
+  const values = [firstName, lastName, email, password, phoneNumber, address, zipcode, positive]
   res.locals.phone = phoneNumber;
   db.query(addUser, values,(err, data)=> {
     if(err) next(err);
