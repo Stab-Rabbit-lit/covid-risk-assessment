@@ -77,10 +77,10 @@ resultsController.calculateRisk = (req, res, next) => {
   const stringActivities = JSON.stringify(maxArray);
 
 
-  const addResultsQuery = `INSERT INTO results (date, risk, activities, user_id) VALUES ('${date}', '${maxRisk}', '${stringActivities}', (SELECT _id FROM users WHERE users.email = '${email}'))`;
+  const addResultsQuery = `INSERT INTO results (date, risk, activities, user_id) VALUES ($1, $2, $3, (SELECT _id FROM users WHERE users.email = $4))`;
+ const values = [date, maxRisk, stringActivities, email]
 
-
-  db.query(addResultsQuery, (err, data)=> {
+  db.query(addResultsQuery, values,(err, data)=> {
     if(err) next(err);
     else {
       return next();
@@ -94,11 +94,12 @@ resultsController.calculateRisk = (req, res, next) => {
     const { email } = req.params;
 
   const getResultsQuery = `
-  SELECT * FROM results WHERE _id = (SELECT _id FROM users WHERE users.email = '${email}')
+  SELECT * FROM results WHERE _id = (SELECT _id FROM users WHERE users.email = $1)
     `;
+    const values = [email];
 
 
-  db.query(getResultsQuery, (err, data)=> {
+  db.query(getResultsQuery, values,(err, data)=> {
     if(err) next(err);
     else {
       res.locals.userResults = data.rows;

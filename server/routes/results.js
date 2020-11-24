@@ -14,9 +14,9 @@ router.post('/', resultsController.calculateRisk, (req, res) => {
 })
 
 //user signs in and 'get' request loads results
-  router.get('/:userId' , resultsController.getUserResults, (req, res) => {
-    res.status.json(res.locals.userResults);
-  });
+  // router.get('/:userId' , resultsController.getUserResults, (req, res) => {
+  //   res.status.json(res.locals.userResults);
+  // });
 
   module.exports = router;
 

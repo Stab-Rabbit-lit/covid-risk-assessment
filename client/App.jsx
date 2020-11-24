@@ -1,10 +1,14 @@
-import React, { Component } from "react";
-import { Route, Switch } from "react-router-dom";
 
-import AssessmentPage from "./components/AssessmentPage.jsx";
-import ResultsPage from "./components/ResultsPage.jsx";
-import LocalData from "./components/LocalDataChart.jsx";
-import ErrorPage from "./components/ErrorPage.jsx";
+import React, {Component} from 'react';
+import {Route, Switch} from 'react-router-dom';
+
+import AssessmentPage from './components/AssessmentPage.jsx';
+import ResultsPage from './components/ResultsPage.jsx';
+import ErrorPage from './components/ErrorPage.jsx';
+import Login from './components/Login.jsx';
+import Signup from './components/Signup.jsx';
+// import LocalData from "./components/LocalDataChart.jsx";
+
 
 class App extends Component {
   constructor(props) {
@@ -13,6 +17,13 @@ class App extends Component {
       riskLevel: "",
       riskyActs: [],
       answers: [],
+      firstName: '',
+      lastName: '',
+      email: '',
+      phoneNumber: '',
+      address: '',
+      zipcode: '',
+      password: '',
     };
 
     this.submitAnswers = this.submitAnswers.bind(this);
@@ -20,10 +31,53 @@ class App extends Component {
     this.removeFromAnswers = this.removeFromAnswers.bind(this);
     this.getRiskLevel = this.getRiskLevel.bind(this);
     this.getRiskyActs = this.getRiskyActs.bind(this);
+    this.submitInfo = this.submitInfo.bind(this);
+    this.submitEmail = this.submitEmail.bind(this);
+    this.submitPassword = this.submitPassword.bind(this);
+  }
+
+  submitEmail(email1){
+    this.setState({email:email1})
+  }
+  submitPassword(password1){
+    this.setState({password: password1 })
+  }
+  submitInfo(userObj) {
+    this.setState({
+      ...this.state,
+      firstName: userObj.firstName,
+      lastName: userObj.lastName,
+      email: userObj.email,
+      phoneNumber: userObj.phoneNumber,
+      address: userObj.address,
+      zipcode: userObj.zipcode,
+      password: userObj.password,
+    });
+    console.log(this.state);
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
+    console.log(this.state);
+    // this.setState();
+    // const signupForm = {
+    //   firstName: firstName,
+    //   lastName: lastName,
+    //   email: email,
+    //   phoneNumber: phoneNumber,
+    //   address: address,
+    //   zipcode: zipcode,
+    //   password: password,
+    // };
+    // axios.post('', signupForm).then((res) => {
+    //   if (res.data !== null) window.location = '/login';
+    //   else window.location = '/signup';
+    // });
   }
 
   submitAnswers() {
-    fetch("/", {
+
+    fetch("/home", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ activities: this.state.answers }),
@@ -88,6 +142,13 @@ class App extends Component {
         <h1>Covid Risk Assessment Quiz</h1>
         <Switch>
           <Route exact path="/">
+            <Login email={this.state.email} submitEmail={this.submitEmail} password={this.state.password} submitPassword={this.submitPassword}/>
+          </Route>
+          <Route path ="/signup">
+            <Signup submitInfo={this.submitInfo}/>
+          </Route>
+            
+          <Route path="/home">
             <AssessmentPage
               submitAnswers={this.submitAnswers}
               add={this.addToAnswers}
