@@ -7,7 +7,7 @@ import ResultsPage from './components/ResultsPage.jsx';
 import ErrorPage from './components/ErrorPage.jsx';
 import Login from './components/Login.jsx';
 import Signup from './components/Signup.jsx';
-import LocalData from "./components/LocalDataChart.jsx";
+// import LocalData from "./components/LocalDataChart.jsx";
 
 
 class App extends Component {
@@ -32,8 +32,16 @@ class App extends Component {
     this.getRiskLevel = this.getRiskLevel.bind(this);
     this.getRiskyActs = this.getRiskyActs.bind(this);
     this.submitInfo = this.submitInfo.bind(this);
+    this.submitEmail = this.submitEmail.bind(this);
+    this.submitPassword = this.submitPassword.bind(this);
   }
 
+  submitEmail(email1){
+    this.setState({email:email1})
+  }
+  submitPassword(password1){
+    this.setState({password: password1 })
+  }
   submitInfo(userObj) {
     this.setState({
       ...this.state,
@@ -134,8 +142,12 @@ class App extends Component {
         <h1>Covid Risk Assessment Quiz</h1>
         <Switch>
           <Route exact path="/">
-            <Signup submitInfo={this.submitInfo} />
+            <Login email={this.state.email} submitEmail={this.submitEmail} password={this.state.password} submitPassword={this.submitPassword}/>
           </Route>
+          <Route path ="/signup">
+            <Signup submitInfo={this.submitInfo}/>
+          </Route>
+            
           <Route path="/home">
             <AssessmentPage
               submitAnswers={this.submitAnswers}

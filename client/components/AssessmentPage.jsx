@@ -2,7 +2,7 @@ import React from "react";
 import { Redirect, NavLink } from "react-router-dom";
 import AssessmentWindow from "./AssessmentWindow.jsx";
 import AboutWindow from "./AboutWindow.jsx";
-import LocalData from "./LocalDataChart.jsx";
+// import LocalData from "./LocalDataChart.jsx";
 import styles from "../styles/styles.css";
 
 function AssessmentPage(props) {
@@ -29,7 +29,7 @@ function AssessmentPage(props) {
         </div>
       </div>
       <div className="window">
-        <LocalData />
+        {/* <LocalData /> */}
       </div>
     </div>
   );

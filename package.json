@@ -44,23 +44,16 @@
     "chart.js": "^2.9.4",
     "create-react-app": "^4.0.1",
     "express": "^4.17.1",
-
     "framer-motion": "^2.9.4",
-
-
-    "pg": "^8.5.1",
-
-    "react": "^16.13.1",
-    "react-dom": "^16.14.0",
-
     "install": "^0.13.0",
+    "pg": "^8.5.1",
     "react": "^16.7.0-alpha.2",
     "react-chartjs-2": "^2.11.1",
     "react-dom": "^16.7.0-alpha.2",
     "react-hook-use-state": "^1.1.0",
     "react-hooks": "^1.0.1",
     "react-hooks-lib": "^0.3.0",
-
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "twilio": "^3.52.0"
   }
 }

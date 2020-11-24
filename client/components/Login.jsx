@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import axios from 'axios';
 import {
   Button,
   Input,
@@ -10,9 +11,53 @@ import {
   Container,
 } from '@chakra-ui/react';
 
-const Login = () => {
+const Login = (props) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const getEmail = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const getPassword = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const loginForm = {
+      email: email,
+      password: password,
+    };
+    console.log('should be email:', loginForm.email);
+    console.log('should be password:', loginForm.password);
+    props.submitEmail(loginForm.email);
+    props.submitPassword(loginForm.password);
+    axios.post('/login', loginForm).then((res) => {
+      console.log(res.data);
+      if (res.data===true) window.location = '/home'})
+  };
+
+  // const onSubmit = (e) => {
+  //   e.preventDefault();
+  //   const signupForm = {
+  //     firstName: firstName,
+  //     lastName: lastName,
+  //     email: email,
+  //     phoneNumber: phoneNumber,
+  //     address: address,
+  //     zipcode: zipcode,
+  //     password: password,
+  //   };
+  //   console.log(signupForm);
+  //   props.submitInfo(signupForm);
+  //   axios.post('', signupForm).then((res) => {
+  //     window.location = '/login';
+  //   });
+  // };
+
   return (
-    <form onSubmit={onSubmit} action="submit">
+    <form onSubmit={onSubmit} action='submit' >
       <Container centerContent>
         <FormControl isRequired>
           <InputGroup>
@@ -21,8 +66,7 @@ const Login = () => {
               type="Email"
               placeholder="email"
               value={email}
-              onChange={getEmail}
-            />
+              onChange={getEmail} />
           </InputGroup>
         </FormControl>
 
@@ -37,7 +81,7 @@ const Login = () => {
             />
           </InputGroup>
         </FormControl>
-        <button type="submit">Login In!</button>
+        <button type="submit"> Log In!</button>
       </Container>
     </form>
   );

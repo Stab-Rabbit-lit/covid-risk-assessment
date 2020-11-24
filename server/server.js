@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: false }));
 // statically serve everything in the build folder on the route '/build'
 app.use('/build', express.static(path.join(__dirname, '../build')));
 
-  app.use('/user', userRouter);
+  app.use('/', userRouter);
   app.use('/results', resultsRouter);
 
 
@@ -30,7 +30,7 @@ app.use((err, req, res) => {
     status: 400,
     message: { err: 'An error occurred' },
   };
-  const errorObj = Object.assign(...{}, defaultErr, err);
+  const errorObj = { ...defaultErr, ...err};
   console.log(errorObj.log);
   return res.status(errorObj.status).json(errorObj.message);
 });
