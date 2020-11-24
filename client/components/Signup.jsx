@@ -9,6 +9,9 @@ import {
   Icon,
   Button,
   Container,
+  Text,
+  RadioGroup,
+  Radio,
 } from '@chakra-ui/react';
 
 const Signup = (props) => {
@@ -19,6 +22,7 @@ const Signup = (props) => {
   const [address, setAddress] = useState('');
   const [zipcode, setZipcode] = useState('');
   const [password, setPassword] = useState('');
+  const [positive, setTest] = useState('');
 
   const getFirstName = (e) => {
     setFirstName(e.target.value);
@@ -46,6 +50,9 @@ const Signup = (props) => {
   const getPassword = (e) => {
     setPassword(e.target.value);
   };
+  const getTest = (e) => {
+    setTest(e.target.value);
+  };
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -57,16 +64,26 @@ const Signup = (props) => {
       address: address,
       zipcode: zipcode,
       password: password,
+      positive: positive,
     };
     console.log(signupForm);
     props.submitInfo(signupForm);
-    axios.post('', signupForm).then((res) => {
-      window.location = '/login';
+    axios.post('/signup', signupForm).then((res) => {
+      window.location = '/home';
     });
   };
 
   return (
     <form onSubmit={onSubmit} action="submit">
+
+{/* <Text mb="8px">Did you get tested for the virus?</Text>
+      <RadioGroup onChange={getTest} value={positive}>
+<Container>
+<Radio value="negative">Negative</Radio>
+<Radio value="positive">Positive</Radio>
+<Radio value="noTest">No Test</Radio>
+</Container>
+</RadioGroup> */}
       <Container centerContent>
         <FormControl isRequired>
           <InputGroup>
@@ -135,6 +152,22 @@ const Signup = (props) => {
           </InputGroup>
         </FormControl>
         <FormControl isRequired>
+
+        
+        <Text mb="8px">Did you get tested for the virus?</Text>
+          <InputGroup>
+            
+            <InputLeftAddon children={<Icon name="info" /> } />
+            <Input
+              type="text"
+              placeholder="Positive, Negative or No test"
+              value={positive}
+              onChange={getTest}
+            />
+          </InputGroup>
+
+        </FormControl>
+        <FormControl isRequired>
           <InputGroup>
             <InputLeftAddon children={<Icon name="lock" />} />
             <Input
@@ -145,12 +178,15 @@ const Signup = (props) => {
             />
           </InputGroup>
         </FormControl>
+        
 
         <Button type="submit" variant="solid">
           Sign Up!
         </Button>
       </Container>
     </form>
+
+
   );
 };
 

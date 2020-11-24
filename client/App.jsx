@@ -24,6 +24,7 @@ class App extends Component {
       address: '',
       zipcode: '',
       password: '',
+      positive: '',
     };
 
     this.submitAnswers = this.submitAnswers.bind(this);
@@ -34,8 +35,11 @@ class App extends Component {
     this.submitInfo = this.submitInfo.bind(this);
     this.submitEmail = this.submitEmail.bind(this);
     this.submitPassword = this.submitPassword.bind(this);
+    this.submitTest = this.submitTest.bind(this);
   }
-
+  submitTest(positive1) {
+    this,setState({positive: positive1})
+  }
   submitEmail(email1){
     this.setState({email:email1})
   }
@@ -52,6 +56,7 @@ class App extends Component {
       address: userObj.address,
       zipcode: userObj.zipcode,
       password: userObj.password,
+      positive: userObj.positive,
     });
     console.log(this.state);
   }
@@ -76,11 +81,16 @@ class App extends Component {
   }
 
   submitAnswers() {
-
+  // add date 
+  const dynamicYear = new Date().getFullYear();
+        const dynamicMonth = new Date().getMonth() + 1;
+        const stringMonth = dynamicMonth.toString();
+        const dynamicDay = new Date().getDate() - 2;
+        let finalDate = dynamicYear + '-' + dynamicMonth + '-' + dynamicDay;
     fetch("/home", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ activities: this.state.answers }),
+      body: JSON.stringify({ activities: this.state.answers, date: finalDate, email: this.state.email }),
     //   body: JSON.stringify( {
     //     first_name: 'Esma',
     //     last_name: 'Sah',
@@ -147,7 +157,7 @@ class App extends Component {
           <Route path ="/signup">
             <Signup submitInfo={this.submitInfo}/>
           </Route>
-            
+
           <Route path="/home">
             <AssessmentPage
               submitAnswers={this.submitAnswers}

@@ -68,7 +68,7 @@ resultsController.calculateRisk = (req, res, next) => {
       maxArray.push(activities[i]);
     }
   }
-
+ 
   res.locals.activities = {
     riskLevel: maxRisk,
     riskyActs: maxArray

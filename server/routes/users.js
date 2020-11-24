@@ -6,7 +6,7 @@ const userController = require('../controllers/userController');
 const smsTexting = require('../controllers/sendSMS');
 
 //user signs up
-  router.post('/', userController.addUser, smsTexting.sendText, (req, res) => {
+  router.post('/signup', userController.addUser, (req, res) => {
     console.log('finished');
     res.status(200).json('signup confirmed');
   });
