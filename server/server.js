@@ -1,38 +1,38 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const PORT = 3000;
-const quizController = require('./quizController.js');
 
+const userRouter = require('./routes/users');
+const resultsRouter = require('./routes/results');
+
+const PORT = 3000;
+
+//Body Parser Middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 // statically serve everything in the build folder on the route '/build'
 app.use('/build', express.static(path.join(__dirname, '../build')));
+
+  app.use('/user', userRouter);
+  app.use('/results', resultsRouter);
+
 
 // route handler to send risk assessment results back to client
 app.get('*', (req, res) => {
   res.status(200).sendFile(path.join(__dirname, '../index.html'));
 });
 
-// route handlers:
-//  will receive the Submit event from the frontend when user completes the quiz
-//  and send assessment result back to frontend:
-app.post('/', quizController.calculateRisk, (req, res) => {
-  res
-    .status(200)
-    // .redirect('/results');
-    .send(res.locals);
-});
-
-// serve index.html on all the pages
-// app.use('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../index.html'));
-// });
-
-// global error handler
-app.use((err, req, res, next) => {
-  console.log(err);
-  res.status(500).send('Internal Server Error');
+// default error handler
+app.use((err, req, res) => {
+  const defaultErr = {
+    log: 'Express error handler caught unknown middleware error',
+    status: 400,
+    message: { err: 'An error occurred' },
+  };
+  const errorObj = Object.assign(...{}, defaultErr, err);
+  console.log(errorObj.log);
+  return res.status(errorObj.status).json(errorObj.message);
 });
 
 //listen
