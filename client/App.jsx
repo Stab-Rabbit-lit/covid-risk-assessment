@@ -3,7 +3,8 @@ import { Route, Switch } from "react-router-dom";
 
 import AssessmentPage from "./components/AssessmentPage.jsx";
 import ResultsPage from "./components/ResultsPage.jsx";
-import LocalData from "./components/LocalDataChart.jsx";
+import CasesByState from "./components/CasesByStateChart.jsx";
+import DeathsByState from "./components/TotalDeathsByState.jsx";
 import ErrorPage from "./components/ErrorPage.jsx";
 
 class App extends Component {
@@ -84,7 +85,22 @@ class App extends Component {
               remove={this.removeFromAnswers}
             />
           </Route>
-
+          <Route exact path="/CasesByState">
+            {/* <AssessmentPage
+              submitAnswers={this.submitAnswers}
+              add={this.addToAnswers}
+              remove={this.removeFromAnswers}
+            /> */}
+            <CasesByState />
+          </Route>
+          <Route exact path="/DeathsByState">
+            {/* <AssessmentPage
+              submitAnswers={this.submitAnswers}
+              add={this.addToAnswers}
+              remove={this.removeFromAnswers}
+            /> */}
+            <DeathsByState />
+          </Route>
           <Route path="/results">
             <ResultsPage
               riskLevel={this.state.riskLevel}

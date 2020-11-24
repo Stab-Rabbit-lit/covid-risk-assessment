@@ -44,7 +44,20 @@ h1 {
   /* margin: 10px; */
   padding-top: 15px;
 }
-
+.navButtons {
+  color: #3a057b;
+  text-decoration: none;
+  font-size: 19px;
+  font-weight: bold;
+}
+.navButtonOnCasesPage {
+  color: #3a057b;
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: bold;
+  padding: 10px 0 0 50px;
+  font-family: Arial, Helvetica, sans-serif;
+}
 .window button {
   padding: 0.7em 4em;
   margin: 30px 120px;
@@ -73,10 +86,11 @@ h1 {
   border-radius: 10px;
   background: #ffffff;
   flex: 1;
-  max-width: 50%;
+  /* justify-content: center; */
+  max-width: 75%;
   padding: 25px 30px;
-  /* margin: 0 60px; */
-  /* margin: 40px 100px 40px 40px; */
+  margin: 0 200px;
+  margin: 40px 100px 40px 40px;
   box-shadow: 5px 10px 20px rgba(10, 10, 10, 0.2);
 }
 
