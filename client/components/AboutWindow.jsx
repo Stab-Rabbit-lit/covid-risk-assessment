@@ -1,4 +1,5 @@
-import React from 'react';
+import React from "react";
+import { Redirect, NavLink } from "react-router-dom";
 
 function AboutWindow(props) {
   return (
@@ -7,12 +8,24 @@ function AboutWindow(props) {
       <p>
         This tool will help you assess your activities and determine your risk
         of contracting COVID-19. It will also offer guidance on what exactly
-        your riskiest activities are. 
-        <p>This information is based on the Texas
-        Medical Association guidelines and has been ranked by physicians from
-        the TMA COVID-19 task force and the TMA committee on infectious
-        diseases.
-        </p>
+        your riskiest activities are.
+      </p>
+      <p>
+        This information is based on the Texas Medical Association guidelines
+        and has been ranked by physicians from the TMA COVID-19 task force and
+        the TMA committee on infectious diseases.
+      </p>
+      <p>
+        <NavLink to="/CasesByState" className="navButtons">
+          See Total Cases By State &#8594;
+        </NavLink>
+        <br></br>
+        <NavLink to="/DeathsByState" className="navButtons">
+          See Total Deaths By State &#8594;
+        </NavLink>
+        <br></br>
+        <a href="#">Find Local Testing Center &#8594;</a>
+        <br></br>
       </p>
     </div>
   );

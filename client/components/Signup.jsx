@@ -11,6 +11,7 @@ import {
   Container,
   Center,
   Text,
+
 } from '@chakra-ui/react';
 import {Redirect} from 'react-router';
 
@@ -22,6 +23,7 @@ const Signup = (props) => {
   const [address, setAddress] = useState('');
   const [zipcode, setZipcode] = useState('');
   const [password, setPassword] = useState('');
+  const [positive, setTest] = useState('');
 
   const getFirstName = (e) => {
     setFirstName(e.target.value);
@@ -49,6 +51,9 @@ const Signup = (props) => {
   const getPassword = (e) => {
     setPassword(e.target.value);
   };
+  const getTest = (e) => {
+    setTest(e.target.value);
+  };
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -60,6 +65,7 @@ const Signup = (props) => {
       address: address,
       zipcode: zipcode,
       password: password,
+      positive: positive,
     };
     console.log(signupForm);
     props.submitInfo(signupForm);
