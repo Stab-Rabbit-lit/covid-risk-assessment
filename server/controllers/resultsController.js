@@ -1,5 +1,6 @@
-const path = require('path');
-const quizController = {};
+const db = require('../dbModels.js');
+
+const resultsController = {};
 
 const riskFactor = {
   mail: 1,
@@ -37,7 +38,7 @@ const risk = {
   5: 'High',
 }
 
-quizController.calculateRisk = (req, res, next) => {
+resultsController.calculateRisk = (req, res, next) => {
   // algorithm for calculating risk goes here
     // iterate over req.body.activities
     // check if activity against our activity lookup object for the activity's risk value
@@ -46,35 +47,66 @@ quizController.calculateRisk = (req, res, next) => {
 
   // if this activity, look in riskFactor object for its value
   // example: [mail, gas, grocery, hair, plane]
-  const acts = req.body.activities;
-  console.log(req.body.activities);
+  const { activities, date, email} = req.body;
   let max = 0;
-  let maxRisk;  
+  let maxRisk;
   let maxArray;
   // let riskLevel;
-    
-  // i = 0: riskFactor[mail] = 1, 1 > 0, make max = 1, maxArray = [mail] 
+
+  // i = 0: riskFactor[mail] = 1, 1 > 0, make max = 1, maxArray = [mail]
   // i = 1: riskFactor[gas] = 1, 1 > 1 -> NO, go to else if. 1 === 1 -> YES!, maxArray = [mail, gas]
   // i = 2: riskFactor[grocery] = 2, 2 > 1 -> YES!, make max = 2, maxArray = [grocery]
   // i = 3: riskFactor[hair] =  4, 4 > 2 -> YES!, make max = 4, maxArray = [hair]
   // i = 4; riskFactor[plane] = 4, 4 > 1 -> NO, go to else if. 4 === 4 -> YES!, maxArray = [hair, plane]
-    
-  for (let i = 0; i < acts.length; i += 1) {
-    if (riskFactor[acts[i]] > max) {
-      max = riskFactor[acts[i]];
+
+  for (let i = 0; i < activities.length; i += 1) {
+    if (riskFactor[activities[i]] > max) {
+      max = riskFactor[activities[i]];
       maxRisk = risk[max];
-      maxArray = [acts[i]];
-    } else if (riskFactor[acts[i]] === max) {
-      maxArray.push(acts[i]);
+      maxArray = [activities[i]];
+    } else if (riskFactor[activities[i]] === max) {
+      maxArray.push(activities[i]);
     }
   }
-  
+
   res.locals.activities = {
     riskLevel: maxRisk,
     riskyActs: maxArray
   }
 
+  const stringActivities = JSON.stringify(maxArray);
+
+
+  const addResultsQuery = `INSERT INTO results (date, risk, activities, user_id) VALUES ($1, $2, $3, (SELECT _id FROM users WHERE users.email = $4))`;
+ const values = [date, maxRisk, stringActivities, email]
+
+  db.query(addResultsQuery, values,(err, data)=> {
+    if(err) next(err);
+    else {
+      return next();
+    }
+  });
+
   return next();
 }
 
-module.exports = quizController;
+  resultsController.getResults = (req, res, next) => {
+    const { email } = req.params;
+
+  const getResultsQuery = `
+  SELECT * FROM results WHERE _id = (SELECT _id FROM users WHERE users.email = $1)
+    `;
+    const values = [email];
+
+
+  db.query(getResultsQuery, values,(err, data)=> {
+    if(err) next(err);
+    else {
+      res.locals.userResults = data.rows;
+      return next();
+    }
+  })
+  };
+
+
+  module.exports = resultsController;

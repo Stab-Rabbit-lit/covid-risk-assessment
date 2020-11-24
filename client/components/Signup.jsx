@@ -10,6 +10,7 @@ import {
   Button,
   Container,
 } from '@chakra-ui/react';
+import {Redirect} from 'react-router';
 
 const Signup = (props) => {
   const [firstName, setFirstName] = useState('');
@@ -60,15 +61,15 @@ const Signup = (props) => {
     };
     console.log(signupForm);
     props.submitInfo(signupForm);
-    axios.post('', signupForm).then((res) => {
-      window.location = '/login';
-    });
+    // axios.post('', signupForm).then((res) => {
+    //   window.location = '/login';
+    // });
   };
 
   return (
     <form onSubmit={onSubmit} action="submit">
       <Container centerContent>
-        <FormControl isRequired>
+        <FormControl>
           <InputGroup>
             <InputLeftAddon children={<Icon name="info" />} />
             <Input
@@ -79,7 +80,7 @@ const Signup = (props) => {
             />
           </InputGroup>
         </FormControl>
-        <FormControl isRequired>
+        <FormControl>
           <InputGroup>
             <InputLeftAddon children={<Icon name="info" />} />
             <Input
@@ -90,7 +91,7 @@ const Signup = (props) => {
             />
           </InputGroup>
         </FormControl>
-        <FormControl isRequired>
+        <FormControl>
           <InputGroup>
             <InputLeftAddon children={<Icon name="email" />} />
             <Input
@@ -101,7 +102,7 @@ const Signup = (props) => {
             />
           </InputGroup>
         </FormControl>
-        <FormControl isRequired>
+        <FormControl>
           <InputGroup>
             <InputLeftAddon children={<Icon name="info" />} />
             <Input
@@ -112,7 +113,7 @@ const Signup = (props) => {
             />
           </InputGroup>
         </FormControl>
-        <FormControl isRequired>
+        <FormControl>
           <InputGroup>
             <InputLeftAddon children={<Icon name="info" />} />
             <Input
@@ -123,7 +124,7 @@ const Signup = (props) => {
             />
           </InputGroup>
         </FormControl>
-        <FormControl isRequired>
+        <FormControl>
           <InputGroup>
             <InputLeftAddon children={<Icon name="info" />} />
             <Input
@@ -134,7 +135,7 @@ const Signup = (props) => {
             />
           </InputGroup>
         </FormControl>
-        <FormControl isRequired>
+        <FormControl>
           <InputGroup>
             <InputLeftAddon children={<Icon name="lock" />} />
             <Input
@@ -157,6 +158,13 @@ const Signup = (props) => {
           Log in!
         </button>
       </Container>
+      <button
+        onClick={() => {
+          window.location('/Login');
+        }}
+      >
+        Log in!
+      </button>
     </form>
   );
 };
