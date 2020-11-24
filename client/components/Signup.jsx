@@ -73,7 +73,7 @@ const Signup = (props) => {
 
   return (
     <Container maxW="300px" maxH="max" mt="50px" color="black">
-      <Center pt="40px" pb="40px" bg="orange" borderRadius="12px">
+      <Center pt="40px" pb="40px" pl="55px" bg="orange" borderRadius="12px">
         <form onSubmit={onSubmit} action="submit">
           <Text ml="50px" fontSize="20px">
             Sign Up
@@ -148,7 +148,7 @@ const Signup = (props) => {
 
 
 <Text mb="8px">Did you get tested for the virus? (Positive, Negative or No test)</Text>
-  <InputGroup>
+  <InputGroup mb="15px" borderRadius="8px">
 
     <InputLeftAddon children={<Icon name="info" /> } />
     <Input
