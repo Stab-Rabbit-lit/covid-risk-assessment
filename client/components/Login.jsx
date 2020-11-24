@@ -9,7 +9,11 @@ import {
   InputLeftAddon,
   Icon,
   Container,
+  Center,
+  Divider,
+  Text,
 } from '@chakra-ui/react';
+import {Redirect} from 'react-router';
 
 const Login = (props) => {
   const [email, setEmail] = useState('');
@@ -35,55 +39,51 @@ const Login = (props) => {
     props.submitPassword(loginForm.password);
     axios.post('/login', loginForm).then((res) => {
       console.log(res.data);
-      if (res.data===true) window.location = '/home'})
+      if (res.data === true) window.location = '/home';
+    });
   };
 
-  // const onSubmit = (e) => {
-  //   e.preventDefault();
-  //   const signupForm = {
-  //     firstName: firstName,
-  //     lastName: lastName,
-  //     email: email,
-  //     phoneNumber: phoneNumber,
-  //     address: address,
-  //     zipcode: zipcode,
-  //     password: password,
-  //   };
-  //   console.log(signupForm);
-  //   props.submitInfo(signupForm);
-  //   axios.post('', signupForm).then((res) => {
-  //     window.location = '/login';
-  //   });
-  // };
-
+  const routeChange = () => {
+    window.location = '/signup';
+  };
   return (
-    <form onSubmit={onSubmit} action='submit' >
-      <Container centerContent>
-        <FormControl isRequired>
-          <InputGroup>
-            <InputLeftAddon children={<Icon name="email" />} />
-            <Input
-              type="Email"
-              placeholder="email"
-              value={email}
-              onChange={getEmail} />
-          </InputGroup>
-        </FormControl>
+    <Container maxW="300px" maxH="max" mt="50px" color="black">
+      <Center pt="40px" pb="40px" bg="silver" borderRadius="12px">
+        <form onSubmit={onSubmit} action="submit">
+          <Text ml="70px">Enter Login Credentials!</Text>
+          <FormControl isRequired>
+            <InputGroup mb="15px" borderRadius="8px" pl="75px">
+              <InputLeftAddon children={<Icon name="email" />} />
+              <Input
+                type="Email"
+                placeholder="email"
+                value={email}
+                onChange={getEmail}
+              />
+            </InputGroup>
+          </FormControl>
 
-        <FormControl isRequired>
-          <InputGroup>
-            <InputLeftAddon children={<Icon name="lock" />} />
-            <Input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={getPassword}
-            />
-          </InputGroup>
-        </FormControl>
-        <button type="submit"> Log In!</button>
-      </Container>
-    </form>
+          <FormControl isRequired>
+            <InputGroup borderRadius="8px" pl="75px">
+              <InputLeftAddon children={<Icon name="lock" />} />
+              <Input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={getPassword}
+              />
+            </InputGroup>
+          </FormControl>
+          <Divider orientation="horizontal" width="250px" />
+          <Button bg="red" type="submit" ml="100px" mt="10px">
+            Log In!
+          </Button>
+          <Button bg="grey" ml="100px" mt="10px" onClick={routeChange}>
+            Sign Up
+          </Button>
+        </form>
+      </Center>
+    </Container>
   );
 };
 

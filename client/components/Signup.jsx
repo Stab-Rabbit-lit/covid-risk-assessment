@@ -2,13 +2,15 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import {
   FormControl,
+  InputLeftAddon,
   Input,
   InputGroup,
-  InputLeftAddon,
   Stack,
   Icon,
   Button,
   Container,
+  Center,
+  Text,
 } from '@chakra-ui/react';
 import {Redirect} from 'react-router';
 
@@ -61,111 +63,107 @@ const Signup = (props) => {
     };
     console.log(signupForm);
     props.submitInfo(signupForm);
-    // axios.post('', signupForm).then((res) => {
-    //   window.location = '/login';
-    // });
   };
 
   return (
-    <form onSubmit={onSubmit} action="submit">
-      <Container centerContent>
-        <FormControl>
-          <InputGroup>
-            <InputLeftAddon children={<Icon name="info" />} />
-            <Input
-              type="firstName"
-              placeholder="First Name"
-              value={firstName}
-              onChange={getFirstName}
-            />
-          </InputGroup>
-        </FormControl>
-        <FormControl>
-          <InputGroup>
-            <InputLeftAddon children={<Icon name="info" />} />
-            <Input
-              type="lastName"
-              placeholder="Last Name"
-              value={lastName}
-              onChange={getLastName}
-            />
-          </InputGroup>
-        </FormControl>
-        <FormControl>
-          <InputGroup>
-            <InputLeftAddon children={<Icon name="email" />} />
-            <Input
-              type="Email"
-              placeholder="email"
-              value={email}
-              onChange={getEmail}
-            />
-          </InputGroup>
-        </FormControl>
-        <FormControl>
-          <InputGroup>
-            <InputLeftAddon children={<Icon name="info" />} />
-            <Input
-              type="phoneNumber"
-              placeholder="Phone Number"
-              value={phoneNumber}
-              onChange={getPhoneNumber}
-            />
-          </InputGroup>
-        </FormControl>
-        <FormControl>
-          <InputGroup>
-            <InputLeftAddon children={<Icon name="info" />} />
-            <Input
-              type="address"
-              placeholder="Address"
-              value={address}
-              onChange={getAddress}
-            />
-          </InputGroup>
-        </FormControl>
-        <FormControl>
-          <InputGroup>
-            <InputLeftAddon children={<Icon name="info" />} />
-            <Input
-              type="zipcode"
-              placeholder="Zipcode"
-              value={zipcode}
-              onChange={getZipcode}
-            />
-          </InputGroup>
-        </FormControl>
-        <FormControl>
-          <InputGroup>
-            <InputLeftAddon children={<Icon name="lock" />} />
-            <Input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={getPassword}
-            />
-          </InputGroup>
-        </FormControl>
+    <Container maxW="300px" maxH="max" mt="50px" color="black">
+      <Center pt="40px" pb="40px" bg="orange" borderRadius="12px">
+        <form onSubmit={onSubmit} action="submit">
+          <Text ml="50px" fontSize="20px">
+            Sign Up
+          </Text>
+          <FormControl>
+            <InputGroup mb="15px" borderRadius="8px">
+              <InputLeftAddon children={<Icon name="info" />} />
+              <Input
+                type="firstName"
+                placeholder="First Name"
+                value={firstName}
+                onChange={getFirstName}
+              />
+            </InputGroup>
+          </FormControl>
+          <FormControl>
+            <InputGroup mb="15px" borderRadius="8px">
+              <InputLeftAddon children={<Icon name="info" />} />
+              <Input
+                type="lastName"
+                placeholder="Last Name"
+                value={lastName}
+                onChange={getLastName}
+              />
+            </InputGroup>
+          </FormControl>
+          <FormControl>
+            <InputGroup mb="15px" borderRadius="8px">
+              <InputLeftAddon children={<Icon name="email" />} />
+              <Input
+                type="Email"
+                placeholder="email"
+                value={email}
+                onChange={getEmail}
+              />
+            </InputGroup>
+          </FormControl>
+          <FormControl>
+            <InputGroup mb="15px" borderRadius="8px">
+              <InputLeftAddon children={<Icon name="info" />} />
+              <Input
+                type="phoneNumber"
+                placeholder="Phone Number"
+                value={phoneNumber}
+                onChange={getPhoneNumber}
+              />
+            </InputGroup>
+          </FormControl>
+          <FormControl mb="15px" borderRadius="8px">
+            <InputGroup>
+              <InputLeftAddon children={<Icon name="info" />} />
+              <Input
+                type="address"
+                placeholder="Address"
+                value={address}
+                onChange={getAddress}
+              />
+            </InputGroup>
+          </FormControl>
+          <FormControl>
+            <InputGroup mb="15px" borderRadius="8px">
+              <InputLeftAddon children={<Icon name="info" />} />
+              <Input
+                type="zipcode"
+                placeholder="Zipcode"
+                value={zipcode}
+                onChange={getZipcode}
+              />
+            </InputGroup>
+          </FormControl>
+          <FormControl>
+            <InputGroup mb="15px" borderRadius="8px">
+              <InputLeftAddon children={<Icon name="lock" />} />
+              <Input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={getPassword}
+              />
+            </InputGroup>
+          </FormControl>
 
-        <Button type="submit" variant="solid">
-          Sign Up!
-        </Button>
-        <button
-          onClick={() => {
-            window.location('/Login');
-          }}
-        >
-          Log in!
-        </button>
-      </Container>
-      <button
-        onClick={() => {
-          window.location('/Login');
-        }}
-      >
-        Log in!
-      </button>
-    </form>
+          <Button type="submit" variant="solid" ml="20px">
+            Sign Up!
+          </Button>
+          <Button
+            ml="10px"
+            onClick={() => {
+              window.location = '/';
+            }}
+          >
+            Log in!
+          </Button>
+        </form>
+      </Center>
+    </Container>
   );
 };
 
