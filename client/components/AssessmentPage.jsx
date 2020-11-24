@@ -2,7 +2,9 @@ import React from "react";
 import { Redirect, NavLink } from "react-router-dom";
 import AssessmentWindow from "./AssessmentWindow.jsx";
 import AboutWindow from "./AboutWindow.jsx";
+
 import CasesByState from "./CasesByStateChart.jsx";
+
 import styles from "../styles/styles.css";
 
 function AssessmentPage(props) {
