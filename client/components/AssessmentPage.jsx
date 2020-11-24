@@ -1,8 +1,9 @@
-import React from 'react';
-import { Redirect, NavLink } from 'react-router-dom';
-import AssessmentWindow from './AssessmentWindow.jsx';
-import AboutWindow from './AboutWindow.jsx';
-import styles from '../styles/styles.css';
+import React from "react";
+import { Redirect, NavLink } from "react-router-dom";
+import AssessmentWindow from "./AssessmentWindow.jsx";
+import AboutWindow from "./AboutWindow.jsx";
+import LocalData from "./LocalDataChart.jsx";
+import styles from "../styles/styles.css";
 
 function AssessmentPage(props) {
   console.log(props);
@@ -26,6 +27,9 @@ function AssessmentPage(props) {
             </button>
           </NavLink>
         </div>
+      </div>
+      <div className="window">
+        <LocalData />
       </div>
     </div>
   );
