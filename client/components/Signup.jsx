@@ -149,6 +149,13 @@ const Signup = (props) => {
         <Button type="submit" variant="solid">
           Sign Up!
         </Button>
+        <button
+          onClick={() => {
+            window.location('/Login');
+          }}
+        >
+          Log in!
+        </button>
       </Container>
     </form>
   );

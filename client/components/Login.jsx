@@ -38,6 +38,13 @@ const Login = () => {
           </InputGroup>
         </FormControl>
         <button type="submit">Login In!</button>
+        <button
+          onClick={() => {
+            window.location('/Signup');
+          }}
+        >
+          Sign Up!
+        </button>
       </Container>
     </form>
   );
