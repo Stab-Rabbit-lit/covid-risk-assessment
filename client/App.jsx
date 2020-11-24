@@ -27,6 +27,16 @@ class App extends Component {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ activities: this.state.answers }),
+    //   body: JSON.stringify( {
+    //     first_name: 'Esma',
+    //     last_name: 'Sah',
+    //     email: 'esma@gmail.com',
+    //     password: 123,
+    //     phone: 2567648273,
+    //     address: '123 west street',
+    //     zip: 34334,
+    // } ),
+
     })
       .then((response) => response.json())
       .then((data) => {
