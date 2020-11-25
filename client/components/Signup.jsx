@@ -68,7 +68,7 @@ const Signup = (props) => {
       address: address,
       zipcode: zipcode,
       password: password,
-      positive: 'yes'
+      positive: positive
     };
     //positive: positive,
     console.log('This da signup form', signupForm);

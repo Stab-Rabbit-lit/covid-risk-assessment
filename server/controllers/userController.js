@@ -28,11 +28,11 @@ console.log('inside addUser');
 // }
 
 //* if errors we want to redirect to the singup page
-if (errors.length > 0) {
-  res.render("/signup", { errors });
+// if (errors.length > 0) {
+// return next(error[0])
 
+// } 
 //* form validation has passed 
-} else{
 const hashPassword = await bcrypt.hash(password, 10);
 console.log(hashPassword);
 
@@ -49,7 +49,7 @@ console.log(hashPassword);
       return next();
     }
   })
-}
+
 
   };
 
