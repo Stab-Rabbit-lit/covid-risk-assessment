@@ -1,8 +1,8 @@
 const db = require('../dbModels.js');
-
+const bcrypt = require("bcrypt");
 const userController = {};
 
-  userController.addUser = (req, res, next) => {
+  userController.addUser = async (req, res, next) => {
 console.log('inside addUser');
     const {
       firstName,
@@ -32,7 +32,8 @@ if (errors.length > 0) {
 
 //* form validation has passed 
 } else{
-const hashPassword = bcrypt.hash(password, 10);
+const hashPassword = await bcrypt.hash(password, 10);
+
   const addUser = `INSERT INTO users (first_name, last_name, email, password, phone, address, zip, test)
   VALUES ($1, $2, $3, $4, $5, $6, $7 , $8) RETURNING _id`;
   const values = [firstName, lastName, email, password, phoneNumber, address, zipcode, positive]
