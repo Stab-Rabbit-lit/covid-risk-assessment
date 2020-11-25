@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { useHistory } from "react-router-dom";
 import axios from 'axios';
 import {
   Button,
@@ -16,10 +17,12 @@ import {
 import {Redirect} from 'react-router';
 
 const Login = (props) => {
+  let history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const getEmail = (e) => {
+    console.log('on Change email:', e.target.value);
     setEmail(e.target.value);
   };
 
@@ -33,18 +36,20 @@ const Login = (props) => {
       email: email,
       password: password,
     };
-    console.log('should be email:', loginForm.email);
-    console.log('should be password:', loginForm.password);
+
+
     props.submitEmail(loginForm.email);
     props.submitPassword(loginForm.password);
+
     axios.post('/login', loginForm).then((res) => {
       console.log(res.data);
-      if (res.data === true) window.location = '/home';
+      if (res.data === true) history.push('/home');
     });
   };
 
   const routeChange = () => {
-    window.location = '/signup';
+    // window.location = '/signup';
+    history.push('/signup')
   };
   return (
     <Container maxW="300px" maxH="max" mt="50px" color="black">

@@ -22,6 +22,7 @@ function AssessmentPage(props) {
           <NavLink to="/results">
             <button
               onClick={() => {
+                console.log('should be email from state', props.email);
                 props.submitAnswers();
               }}
             >
@@ -30,9 +31,7 @@ function AssessmentPage(props) {
           </NavLink>
         </div>
       </div>
-      <div className="window">
-        <CasesByState />
-      </div>
+
     </div>
   );
 }
