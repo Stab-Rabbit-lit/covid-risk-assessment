@@ -31,6 +31,7 @@ class App extends Component {
       zipcode: '',
       password: '',
       positive: '',
+      // sms: '',
     };
 
     this.submitAnswers = this.submitAnswers.bind(this);
@@ -42,9 +43,14 @@ class App extends Component {
     this.submitEmail = this.submitEmail.bind(this);
     this.submitPassword = this.submitPassword.bind(this);
     this.submitTest = this.submitTest.bind(this);
+    // this.smsAlert = this.smsAlert.bind(this);
   }
+  // smsAlert(sms1){
+  //   console.log('smsAlert',sms1);
+  //   this.setState({sms: sms1})
+  // }
   submitTest(positive1) {
-    this,setState({positive: positive1})
+    this.setState({positive: positive1})
   }
   submitEmail(email1){
     this.setState({email: email1})
@@ -170,6 +176,8 @@ class App extends Component {
               add={this.addToAnswers}
               remove={this.removeFromAnswers}
               email={this.state.email}
+              sms={this.state.sms}
+              // smsAlert={this.smsALert}
             />
           </Route>
           <Route exact path="/CasesByState">

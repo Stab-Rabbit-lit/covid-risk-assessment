@@ -8,7 +8,7 @@ function AboutWindow(props) {
   <FormLabel htmlFor="sms-alerts" mb="0">
     Enable SMS alerts?
   </FormLabel>
-  <Switch colorScheme="orange" id="sms-alerts" />
+  <Switch colorScheme="orange" id="sms-alerts"/>
 </FormControl>
       <h3>About the Quiz</h3>
       <p>
