@@ -56,6 +56,8 @@ const Login = (props) => {
           isClosable: true,
         });
         history.push('/home');
+      } else {
+        alert('Password or email is incorrect')
       }
     });
   };
