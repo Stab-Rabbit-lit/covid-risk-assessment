@@ -154,7 +154,7 @@ class App extends Component {
 
   render() {
     return (
-      <div class='everything'>
+      <div className='everything'>
         <h1>Covid Risk Assessment Quiz</h1>
         <Switch>
           <Route exact path="/">

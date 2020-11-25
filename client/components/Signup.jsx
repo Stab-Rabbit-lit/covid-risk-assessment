@@ -170,7 +170,7 @@ const Signup = (props) => {
 
 
 <Text mb="8px">Did you get tested for the virus? (Positive, Negative or No test)</Text>
-  <InputGroup>
+  <InputGroup mb="15px" borderRadius="8px">
 
     <InputLeftAddon children={<Icon name="info" /> } />
     <Input
