@@ -1,20 +1,18 @@
-
-
 import CasesByState from "./components/CasesByStateChart.jsx";
 import DeathsByState from "./components/TotalDeathsByState.jsx";
-import React, {Component} from 'react';
-import {Route, Switch} from 'react-router-dom';
-import {Box} from '@chakra-ui/react';
+import React, { Component } from "react";
+import { Route, Switch } from "react-router-dom";
+import { Box } from "@chakra-ui/react";
 
-import AssessmentPage from './components/AssessmentPage.jsx';
-import ResultsPage from './components/ResultsPage.jsx';
-import ErrorPage from './components/ErrorPage.jsx';
-import PastResults from './components/PastResults.jsx';
-import Login from './components/Login.jsx';
-import Signup from './components/Signup.jsx';
+import AssessmentPage from "./components/AssessmentPage.jsx";
+import ResultsPage from "./components/ResultsPage.jsx";
+import ErrorPage from "./components/ErrorPage.jsx";
+import PastResults from "./components/PastResults.jsx";
+import LocalTestingCenters from "./components/FindLocalTestingCenter.jsx";
+import Login from "./components/Login.jsx";
+import Signup from "./components/Signup.jsx";
 
 // import LocalData from "./components/LocalDataChart.jsx";
-
 
 class App extends Component {
   constructor(props) {
@@ -23,14 +21,14 @@ class App extends Component {
       riskLevel: "",
       riskyActs: [],
       answers: [],
-      firstName: '',
-      lastName: '',
-      email: '',
-      phoneNumber: '',
-      address: '',
-      zipcode: '',
-      password: '',
-      positive: '',
+      firstName: "",
+      lastName: "",
+      email: "",
+      phoneNumber: "",
+      address: "",
+      zipcode: "",
+      password: "",
+      positive: "",
     };
 
     this.submitAnswers = this.submitAnswers.bind(this);
@@ -44,13 +42,13 @@ class App extends Component {
     this.submitTest = this.submitTest.bind(this);
   }
   submitTest(positive1) {
-    this,setState({positive: positive1})
+    this, setState({ positive: positive1 });
   }
-  submitEmail(email1){
-    this.setState({email: email1})
+  submitEmail(email1) {
+    this.setState({ email: email1 });
   }
-  submitPassword(password1){
-    this.setState({password: password1 })
+  submitPassword(password1) {
+    this.setState({ password: password1 });
   }
   submitInfo(userObj) {
     this.setState({
@@ -87,26 +85,29 @@ class App extends Component {
   }
 
   submitAnswers() {
-  // add date
-  const dynamicYear = new Date().getFullYear();
-        const dynamicMonth = new Date().getMonth() + 1;
-        const stringMonth = dynamicMonth.toString();
-        const dynamicDay = new Date().getDate() - 2;
-        let finalDate = dynamicYear + '-' + dynamicMonth + '-' + dynamicDay;
+    // add date
+    const dynamicYear = new Date().getFullYear();
+    const dynamicMonth = new Date().getMonth() + 1;
+    const stringMonth = dynamicMonth.toString();
+    const dynamicDay = new Date().getDate() - 2;
+    let finalDate = dynamicYear + "-" + dynamicMonth + "-" + dynamicDay;
     fetch("/results", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ activities: this.state.answers, date: finalDate, email: this.state.email }),
-    //   body: JSON.stringify( {
-    //     first_name: 'Esma',
-    //     last_name: 'Sah',
-    //     email: 'esma@gmail.com',
-    //     password: 123,
-    //     phone: 2567648273,
-    //     address: '123 west street',
-    //     zip: 34334,
-    // } ),
-
+      body: JSON.stringify({
+        activities: this.state.answers,
+        date: finalDate,
+        email: this.state.email,
+      }),
+      //   body: JSON.stringify( {
+      //     first_name: 'Esma',
+      //     last_name: 'Sah',
+      //     email: 'esma@gmail.com',
+      //     password: 123,
+      //     phone: 2567648273,
+      //     address: '123 west street',
+      //     zip: 34334,
+      // } ),
     })
       .then((response) => response.json())
       .then((data) => {
@@ -154,14 +155,19 @@ class App extends Component {
 
   render() {
     return (
-      <div className='everything'>
+      <div className="everything">
         <h1>Covid Risk Assessment Quiz</h1>
         <Switch>
           <Route exact path="/">
-            <Login email={this.state.email} submitEmail={this.submitEmail} password={this.state.password} submitPassword={this.submitPassword}/>
+            <Login
+              email={this.state.email}
+              submitEmail={this.submitEmail}
+              password={this.state.password}
+              submitPassword={this.submitPassword}
+            />
           </Route>
-          <Route path ="/signup">
-            <Signup submitInfo={this.submitInfo}/>
+          <Route path="/signup">
+            <Signup submitInfo={this.submitInfo} />
           </Route>
 
           <Route path="/home">
@@ -186,8 +192,11 @@ class App extends Component {
               getRiskyActs={this.getRiskyActs}
             />
           </Route>
-          <Route exact path="/PastResults" >
+          <Route exact path="/PastResults">
             <PastResults email={this.state.email} />
+          </Route>
+          <Route exact path="/LocalTestingCenters">
+            <LocalTestingCenters />
           </Route>
 
           <Route component={ErrorPage} />

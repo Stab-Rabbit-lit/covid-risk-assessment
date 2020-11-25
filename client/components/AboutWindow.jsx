@@ -28,6 +28,10 @@ function AboutWindow(props) {
           See Your Past Results &#8594;
         </NavLink>
         <br></br>
+        <NavLink to="/LocalTestingCenters" className="navButtons">
+          Find Local Testing Centers &#8594;
+        </NavLink>
+        <br></br>
       </p>
     </div>
   );
