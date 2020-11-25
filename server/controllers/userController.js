@@ -15,6 +15,24 @@ console.log('inside addUser');
       positive
   } = req.body;
 
+  //handle form errors into an array
+  const errors = [];
+ //* check if all forms are entered
+ if(!firstName || !lastName || !email || !password || !phoneNumber || !address || !zipcode || !positive){
+   errors.push({message: 'please enter all fields'})
+ }
+ //* check if the password is long enough to be more secure
+//  if (password.length < 6) {
+//   errors.push({ message: "Password must be a least 6 characters long" });
+// }
+
+//* if errors we want to redirect to the singup page
+if (errors.length > 0) {
+  res.render("/signup", { errors });
+
+//* form validation has passed 
+} else{
+const hashPassword = bcrypt.hash(password, 10);
   const addUser = `INSERT INTO users (first_name, last_name, email, password, phone, address, zip, test)
   VALUES ($1, $2, $3, $4, $5, $6, $7 , $8) RETURNING _id`;
   const values = [firstName, lastName, email, password, phoneNumber, address, zipcode, positive]
@@ -26,6 +44,8 @@ console.log('inside addUser');
       return next();
     }
   })
+}
+
   };
 
   //to add: verifyLogin

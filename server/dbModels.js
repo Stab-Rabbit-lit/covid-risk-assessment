@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const { Pool } = require('pg');
 // db link from elephantSQL
 const PG_URI = 'postgres://vlicrqbr:e9pTXX-t7r22_RgtC0--R5pYrH2BucIY@suleiman.db.elephantsql.com:5432/vlicrqbr'

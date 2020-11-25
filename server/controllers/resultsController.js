@@ -92,6 +92,7 @@ resultsController.calculateRisk = (req, res, next) => {
 
   resultsController.getResults = (req, res, next) => {
     const { email } = req.params;
+    console.log('email', email);
 
   const getResultsQuery = `
   SELECT * FROM results WHERE _id = (SELECT _id FROM users WHERE users.email = $1)
@@ -102,6 +103,7 @@ resultsController.calculateRisk = (req, res, next) => {
   db.query(getResultsQuery, values,(err, data)=> {
     if(err) next(err);
     else {
+      console.log('data.rows', data.rows);
       res.locals.userResults = data.rows;
       return next();
     }
