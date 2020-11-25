@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { useHistory } from 'react-router-dom'
 import axios from 'axios';
 import {
   FormControl,
@@ -11,11 +12,13 @@ import {
   Container,
   Center,
   Text,
-
+  useToast
 } from '@chakra-ui/react';
+import { ArrowRightIcon, StarIcon, WarningIcon, EmailIcon, PhoneIcon, LockIcon, TriangleDownIcon, InfoIcon, ArrowForwardIcon } from '@chakra-ui/icons'
 import {Redirect} from 'react-router';
 
 const Signup = (props) => {
+  let history = useHistory();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -65,22 +68,41 @@ const Signup = (props) => {
       address: address,
       zipcode: zipcode,
       password: password,
-      positive: positive,
+      positive: 'yes'
     };
-    console.log(signupForm);
+    //positive: positive,
+    console.log('This da signup form', signupForm);
     props.submitInfo(signupForm);
+
+    axios.post('/signup', signupForm).then((res) => {
+      console.log(res.data);
+      if (res.data === true) {
+        toast({
+          title: "Signed Up.",
+          description: "You are now signed up!",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
+        history.push('/home');
+      }
+    });
+
   };
 
+  const toast = useToast();
   return (
-    <Container maxW="300px" maxH="max" mt="50px" color="black">
-      <Center pt="40px" pb="40px" bg="orange" borderRadius="12px">
+    <Container mt="50px">
+      <Center pt="40px" pb="40px" bg="#FAC95F" borderRadius="12px" boxShadow='dark-lg' width="470px">
         <form onSubmit={onSubmit} action="submit">
-          <Text ml="50px" fontSize="20px">
-            Sign Up
-          </Text>
-          <FormControl>
+            <Center mb='10px'>
+              <Text fontSize="3xl">
+                Sign Up
+              </Text>
+            </Center>
+            <FormControl isRequired >
             <InputGroup mb="15px" borderRadius="8px">
-              <InputLeftAddon children={<Icon name="info" />} />
+              <InputLeftAddon children={< StarIcon />} />
               <Input
                 type="firstName"
                 placeholder="First Name"
@@ -89,9 +111,9 @@ const Signup = (props) => {
               />
             </InputGroup>
           </FormControl>
-          <FormControl>
+            <FormControl isRequired >
             <InputGroup mb="15px" borderRadius="8px">
-              <InputLeftAddon children={<Icon name="info" />} />
+              <InputLeftAddon children={<StarIcon />} />
               <Input
                 type="lastName"
                 placeholder="Last Name"
@@ -100,9 +122,9 @@ const Signup = (props) => {
               />
             </InputGroup>
           </FormControl>
-          <FormControl>
+            <FormControl isRequired >
             <InputGroup mb="15px" borderRadius="8px">
-              <InputLeftAddon children={<Icon name="email" />} />
+              <InputLeftAddon children={<EmailIcon />} />
               <Input
                 type="Email"
                 placeholder="email"
@@ -111,9 +133,9 @@ const Signup = (props) => {
               />
             </InputGroup>
           </FormControl>
-          <FormControl>
+            <FormControl isRequired >
             <InputGroup mb="15px" borderRadius="8px">
-              <InputLeftAddon children={<Icon name="info" />} />
+              <InputLeftAddon children={<PhoneIcon />} />
               <Input
                 type="phoneNumber"
                 placeholder="Phone Number"
@@ -124,7 +146,7 @@ const Signup = (props) => {
           </FormControl>
           <FormControl mb="15px" borderRadius="8px">
             <InputGroup>
-              <InputLeftAddon children={<Icon name="info" />} />
+              <InputLeftAddon children={<InfoIcon />} />
               <Input
                 type="address"
                 placeholder="Address"
@@ -133,9 +155,9 @@ const Signup = (props) => {
               />
             </InputGroup>
           </FormControl>
-          <FormControl>
+            <FormControl isRequired >
             <InputGroup mb="15px" borderRadius="8px">
-              <InputLeftAddon children={<Icon name="info" />} />
+              <InputLeftAddon children={<InfoIcon />} />
               <Input
                 type="zipcode"
                 placeholder="Zipcode"
@@ -144,9 +166,9 @@ const Signup = (props) => {
               />
             </InputGroup>
           </FormControl>
-          <FormControl>
+            <FormControl isRequired >
             <InputGroup mb="15px" borderRadius="8px">
-              <InputLeftAddon children={<Icon name="lock" />} />
+              <InputLeftAddon children={<LockIcon />} />
               <Input
                 type="password"
                 placeholder="Password"
@@ -156,16 +178,18 @@ const Signup = (props) => {
             </InputGroup>
           </FormControl>
 
-          <Button type="submit" variant="solid" ml="20px">
-            Sign Up!
+          <Button rightIcon={<ArrowForwardIcon />} type="submit" ml="8px">
+            Sign Up
           </Button>
           <Button
+            rightIcon={<ArrowForwardIcon />}
             ml="10px"
             onClick={() => {
               window.location = '/';
             }}
+            p='20px'
           >
-            Log in!
+            Log In
           </Button>
         </form>
       </Center>
