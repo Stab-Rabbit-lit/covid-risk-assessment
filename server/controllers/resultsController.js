@@ -108,4 +108,24 @@ resultsController.getResults = (req, res, next) => {
   });
 };
 
+resultsController.getZip = (req, res, next) => {
+  const { email } = req.params;
+  console.log("email", email);
+
+  //SELECT zip FROM results WHERE user_id = (SELECT _id FROM users WHERE users.email = $1)
+  const getSameZipQuery = `
+  SELECT * FROM users WHERE users.zip = (SELECT zip FROM users WHERE users.email = $1)
+    `;
+  const values = [email];
+
+  db.query(getSameZipQuery, values, (err, data) => {
+    if (err) next(err);
+    else {
+      console.log("data.rows", data.rows);
+      res.locals.zipResults = data.rows;
+      return next();
+    }
+  });
+};
+
 module.exports = resultsController;

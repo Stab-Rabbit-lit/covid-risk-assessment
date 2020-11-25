@@ -2,10 +2,14 @@ import React from "react";
 import { Redirect, NavLink } from "react-router-dom";
 import AssessmentWindow from "./AssessmentWindow.jsx";
 import AboutWindow from "./AboutWindow.jsx";
+import AboutNeighbors from "./AboutNeighbors.jsx";
+
 
 import CasesByState from "./CasesByStateChart.jsx";
 
 import styles from "../styles/styles.css";
+
+
 
 function AssessmentPage(props) {
   console.log(props);
@@ -14,6 +18,7 @@ function AssessmentPage(props) {
       <div id="assessment-page">
         <div className="window">
           <AboutWindow />
+          <AboutNeighbors email={props.email}/>
         </div>
         <div className="window">
           <AssessmentWindow add={props.add} remove={props.remove} />

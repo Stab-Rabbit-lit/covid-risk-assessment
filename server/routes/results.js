@@ -16,5 +16,9 @@ router.post('/', resultsController.calculateRisk, (req, res) => {
     res.status(200).json(res.locals.userResults);
   })
 
+  router.get('/zip/:email', resultsController.getZip, (req, res) => {
+    res.status(200).json(res.locals.zipResults);
+  })
+
   module.exports = router;
 
