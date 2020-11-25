@@ -8,12 +8,17 @@ import {
   FormControl,
   InputGroup,
   InputLeftAddon,
-  Icon,
   Container,
   Center,
   Divider,
   Text,
+  InputLeftElement,
+  Box,
+  useToast,
+  Flex,
+  HStack,
 } from '@chakra-ui/react';
+import { EmailIcon, LockIcon, ArrowForwardIcon } from '@chakra-ui/icons'
 import {Redirect} from 'react-router';
 
 const Login = (props) => {
@@ -37,59 +42,75 @@ const Login = (props) => {
       password: password,
     };
 
-
     props.submitEmail(loginForm.email);
     props.submitPassword(loginForm.password);
 
     axios.post('/login', loginForm).then((res) => {
       console.log(res.data);
-      if (res.data === true) history.push('/home');
+      if (res.data === true) {
+        toast({
+          title: "Logged in.",
+          description: "You are now signed in!",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
+        history.push('/home');
+      }
     });
   };
 
   const routeChange = () => {
     // window.location = '/signup';
     history.push('/signup')
-  };
-  return (
-    <Container maxW="300px" maxH="max" mt="50px" color="black">
-      <Center pt="40px" pb="40px" bg="silver" borderRadius="12px">
-        <form onSubmit={onSubmit} action="submit">
-          <Text ml="70px">Enter Login Credentials!</Text>
-          <FormControl isRequired>
-            <InputGroup mb="15px" borderRadius="8px" pl="75px">
-              <InputLeftAddon children={<Icon name="email" />} />
-              <Input
-                type="Email"
-                placeholder="email"
-                value={email}
-                onChange={getEmail}
-              />
-            </InputGroup>
-          </FormControl>
+  }
 
-          <FormControl isRequired>
-            <InputGroup borderRadius="8px" pl="75px">
-              <InputLeftAddon children={<Icon name="lock" />} />
-              <Input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={getPassword}
-              />
-            </InputGroup>
-          </FormControl>
-          <Divider orientation="horizontal" width="250px" />
-          <Button bg="red" type="submit" ml="100px" mt="10px">
-            Log In!
-          </Button>
-          <Button bg="grey" ml="100px" mt="10px" onClick={routeChange}>
-            Sign Up
-          </Button>
-        </form>
-      </Center>
-    </Container>
-  );
+  const toast = useToast();
+  return (
+    <Center>
+        <Center maxWidth='400px' pt="40px" pb="40px" bg='#FAC95F' borderRadius="12px" p='25px' mt='50px' boxShadow='dark-lg'>
+            <form onSubmit={onSubmit} action="submit">
+              <Center mb='15px'>
+                <Text fontSize="2xl">Enter Login Credentials!</Text>
+              </Center>
+              <FormControl isRequired >
+                <InputGroup mb="15px" borderRadius="8px">
+                  <InputLeftAddon children={<EmailIcon/>} />
+                  <Input
+                    type="Email"
+                    placeHolder="Enter Email"
+                    value={email}
+                    onChange={getEmail}
+                    color='black'
+                  />
+                </InputGroup>
+              </FormControl>
+              <FormControl isRequired>
+                <InputGroup borderRadius="8px">
+                  <InputLeftAddon children={<LockIcon />} />
+                  <Input
+                    type="password"
+                    placeHolder="Enter Password"
+                    value={password}
+                    onChange={getPassword}
+                  />
+                </InputGroup>
+              </FormControl>
+              <Center mt='15px'>
+                <HStack>
+                  <Button rightIcon={<ArrowForwardIcon />} bg="lavender" type="submit" >
+                    Log In
+                  </Button>
+                  <Button rightIcon={<ArrowForwardIcon />} bg="lavender" onClick={routeChange}>
+                    Sign Up
+                  </Button>
+                </HStack>
+              </Center>
+
+            </form>
+        </Center>
+    </Center>
+  )
 };
 
 export default Login;

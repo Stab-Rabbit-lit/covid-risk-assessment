@@ -1,11 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Shrikhand&display=swap");
 
-body {
+.everything {
   box-sizing: content-box;
   /* background: url("https://user-images.githubusercontent.com/54503796/99884480-83ec8180-2bfc-11eb-824b-2c484ba02014.jpg"); */
   /* background: url("https://user-images.githubusercontent.com/54503796/99885890-1ba29d80-2c06-11eb-9852-199778c60251.jpg");
   background-size: 50%; */
-  background: rgb(215, 247, 244);
   background: url("https://user-images.githubusercontent.com/54503796/99887077-5957f400-2c0f-11eb-9720-eebdf664f283.png"),
     linear-gradient(
       90deg,
@@ -15,9 +14,10 @@ body {
       rgba(254, 189, 82, 1) 72%,
       rgba(255, 107, 0, 1) 100%
     );
+  height: 1100px;
 }
 
-h1 {
+.everything h1 {
   font-family: "Shrikhand", cursive;
   font-size: 4.25em;
   color: #3a057b;
@@ -174,4 +174,8 @@ h1 {
 #questions {
   display: grid;
   grid-template-columns: 1fr 1fr;
+}
+
+.submitButtonnn {
+  border-radius: 16px;
 }

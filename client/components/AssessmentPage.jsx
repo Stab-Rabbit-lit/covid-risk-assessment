@@ -21,6 +21,7 @@ function AssessmentPage(props) {
 
           <NavLink to="/results">
             <button
+              className='submitButtonnn'
               onClick={() => {
                 console.log('should be email from state', props.email);
                 props.submitAnswers();
