@@ -68,7 +68,7 @@ resultsController.calculateRisk = (req, res, next) => {
       maxArray.push(activities[i]);
     }
   }
- 
+
   res.locals.activities = {
     riskLevel: maxRisk,
     riskyActs: maxArray
@@ -102,6 +102,7 @@ resultsController.calculateRisk = (req, res, next) => {
   db.query(getResultsQuery, values,(err, data)=> {
     if(err) next(err);
     else {
+      console.log('data.rows', data.rows);
       res.locals.userResults = data.rows;
       return next();
     }

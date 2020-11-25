@@ -8,6 +8,7 @@ import {Route, Switch} from 'react-router-dom';
 import AssessmentPage from './components/AssessmentPage.jsx';
 import ResultsPage from './components/ResultsPage.jsx';
 import ErrorPage from './components/ErrorPage.jsx';
+import PastResults from './components/PastResults.jsx';
 import Login from './components/Login.jsx';
 import Signup from './components/Signup.jsx';
 // import LocalData from "./components/LocalDataChart.jsx";
@@ -44,7 +45,7 @@ class App extends Component {
     this,setState({positive: positive1})
   }
   submitEmail(email1){
-    this.setState({email:email1})
+    this.setState({email: email1})
   }
   submitPassword(password1){
     this.setState({password: password1 })
@@ -84,13 +85,13 @@ class App extends Component {
   }
 
   submitAnswers() {
-  // add date 
+  // add date
   const dynamicYear = new Date().getFullYear();
         const dynamicMonth = new Date().getMonth() + 1;
         const stringMonth = dynamicMonth.toString();
         const dynamicDay = new Date().getDate() - 2;
         let finalDate = dynamicYear + '-' + dynamicMonth + '-' + dynamicDay;
-    fetch("/home", {
+    fetch("/results", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ activities: this.state.answers, date: finalDate, email: this.state.email }),
@@ -166,22 +167,13 @@ class App extends Component {
               submitAnswers={this.submitAnswers}
               add={this.addToAnswers}
               remove={this.removeFromAnswers}
+              email={this.state.email}
             />
           </Route>
           <Route exact path="/CasesByState">
-            {/* <AssessmentPage
-              submitAnswers={this.submitAnswers}
-              add={this.addToAnswers}
-              remove={this.removeFromAnswers}
-            /> */}
             <CasesByState />
           </Route>
           <Route exact path="/DeathsByState">
-            {/* <AssessmentPage
-              submitAnswers={this.submitAnswers}
-              add={this.addToAnswers}
-              remove={this.removeFromAnswers}
-            /> */}
             <DeathsByState />
           </Route>
           <Route path="/results">
@@ -192,6 +184,10 @@ class App extends Component {
               getRiskyActs={this.getRiskyActs}
             />
           </Route>
+          <Route exact path="/PastResults" >
+            <PastResults email={this.state.email} />
+          </Route>
+
           <Route component={ErrorPage} />
         </Switch>
       </div>

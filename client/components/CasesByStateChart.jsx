@@ -63,7 +63,7 @@ class CasesByState extends Component {
         <div className="chart-window">
           <Bar data={this.state.chartData} />
         </div>
-        <NavLink to="/" className="navButtonOnCasesPage">
+        <NavLink to="/home" className="navButtonOnCasesPage">
           Return to Home Page &#8594;
         </NavLink>
       </div>
