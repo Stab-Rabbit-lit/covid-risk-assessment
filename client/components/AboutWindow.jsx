@@ -24,7 +24,9 @@ function AboutWindow(props) {
           See Total Deaths By State &#8594;
         </NavLink>
         <br></br>
-        <a href="#">Find Local Testing Center &#8594;</a>
+        <NavLink to="/PastResults" className="navButtons">
+          See Your Past Results &#8594;
+        </NavLink>
         <br></br>
       </p>
     </div>
