@@ -8,11 +8,11 @@ const smsTexting = require('../controllers/sendSMS');
 //user signs up
   router.post('/signup', userController.addUser, (req, res) => {
     console.log('finished');
-    res.status(200).json('signup confirmed');
+    res.status(200).json(true);
   });
 
   router.post('/login', userController.verifyUser, (req, res) => {
-console.log(res.locals.results);
+    console.log('should be true', res.locals.results);
     res.status(200).json(res.locals.results);
   });
 

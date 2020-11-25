@@ -33,33 +33,34 @@ class PastResults extends Component {
       console.log('this is res.data', res.data);
       let results = [];
       //[row, row]
-      const toConvert = {
-        'Low': 1,
-        'Moderate Low': 2,
-        'Moderate': 3,
-        'Moderate High': 4,
-        'High': 5,
-      }
       for (let i = 0; i < res.data.length; i++) {
-        results.push([res.data[i].date, toConvert[res.data[i].risk]]);
+        let indexZero = res.data[i].date;
+        let indexOne = res.data[i].risk;
+        results.push([indexZero, indexOne]);
       }
+      for (let i = 0; i < 7; i++) {
+        results.push(['' + i, '' + i]);
+      }
+      console.log(results);
       this.setState({allData: results});
     });
   }
 
   render() {
+    console.log('inside render:', this.state.allData);
 
+    this.state.allData.forEach((elem) => {
+      this.state.data.labels.push(elem[0])
+      this.state.data.datasets[0].data.push(elem[1])
+    });
     return (
-      <div>
         <div className="chart-window">
           <Line data={this.state.data}/>
-        </div>
-        <NavLink to="/home" className="navButtonOnCasesPage">
+          <NavLink to="/home" className="navButtonOnCasesPage">
           Return to Home Page &#8594;
-        </NavLink>
-      </div>
-    );
-  }
+          </NavLink>
+        </div>
+    )}
 }
 
 export default PastResults;

@@ -32,10 +32,11 @@ class DeathsByState extends Component {
         const dynamicYear = new Date().getFullYear();
         const dynamicMonth = new Date().getMonth() + 1;
         const stringMonth = dynamicMonth.toString();
-        const dynamicDay = new Date().getDate() - 2;
+        const dynamicDay = new Date().getDate() - 3;
         let finalDate = dynamicYear + "-" + dynamicMonth + "-" + dynamicDay;
 
         const filteredData = data.filter((states) => states.date > finalDate);
+
         this.setState({ allFilteredData: filteredData });
       })
       .catch((error) => console.error(`Error: ${error}`));

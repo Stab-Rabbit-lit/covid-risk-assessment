@@ -4,6 +4,7 @@ import CasesByState from "./components/CasesByStateChart.jsx";
 import DeathsByState from "./components/TotalDeathsByState.jsx";
 import React, {Component} from 'react';
 import {Route, Switch} from 'react-router-dom';
+import {Box} from '@chakra-ui/react';
 
 import AssessmentPage from './components/AssessmentPage.jsx';
 import ResultsPage from './components/ResultsPage.jsx';
@@ -11,6 +12,7 @@ import ErrorPage from './components/ErrorPage.jsx';
 import PastResults from './components/PastResults.jsx';
 import Login from './components/Login.jsx';
 import Signup from './components/Signup.jsx';
+
 // import LocalData from "./components/LocalDataChart.jsx";
 
 
@@ -60,7 +62,7 @@ class App extends Component {
       address: userObj.address,
       zipcode: userObj.zipcode,
       password: userObj.password,
-      positive: userObj.positive,
+      //positive: userObj.positive,
     });
     console.log(this.state);
   }
@@ -152,7 +154,7 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className='everything'>
         <h1>Covid Risk Assessment Quiz</h1>
         <Switch>
           <Route exact path="/">
