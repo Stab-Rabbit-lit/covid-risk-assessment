@@ -1,9 +1,15 @@
 import React from "react";
 import { Redirect, NavLink } from "react-router-dom";
-
+import { FormControl, FormLabel, Switch } from '@chakra-ui/react';
 function AboutWindow(props) {
   return (
     <div className="about-window">
+         <FormControl className="sms-form" display="flex" alignItems="center">
+  <FormLabel htmlFor="sms-alerts" mb="0">
+    Enable SMS alerts?
+  </FormLabel>
+  <Switch colorScheme="orange" id="sms-alerts"/>
+</FormControl>
       <h3>About the Quiz</h3>
       <p>
         This tool will help you assess your activities and determine your risk
