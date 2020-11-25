@@ -32,7 +32,6 @@ function AssessmentPage(props) {
           </NavLink>
         </div>
       </div>
-
     </div>
   );
 }

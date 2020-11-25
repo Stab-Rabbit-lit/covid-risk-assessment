@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import Activities from './Activities.jsx';
-import styles from '../styles/styles.css';
-import Questions from '../questions';
+import React, { useEffect, useState } from "react";
+import { Redirect, NavLink } from "react-router-dom";
+import Activities from "./Activities.jsx";
+import styles from "../styles/styles.css";
+import Questions from "../questions";
 
 function ResultsPage(props) {
   let questions = Questions;
@@ -21,10 +22,18 @@ function ResultsPage(props) {
     <div id="results-window">
       <div>
         <h3 id="results-header">Your Results:</h3>
-        <h5 className="results-label">Risk level based on behaviors: {props.riskLevel}</h5>
-        <h5 className="results-label">The riskiest behaviors you engage in include:</h5>
+        <h5 className="results-label">
+          Risk level based on behaviors: {props.riskLevel}
+        </h5>
+        <h5 className="results-label">
+          The riskiest behaviors you engage in include:
+        </h5>
         {activities}
+        <br></br>
       </div>
+      <NavLink to="/home" className="navButtonOnCasesPage">
+        Return to Home Page &#8594;
+      </NavLink>
     </div>
   );
 }

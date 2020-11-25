@@ -57,7 +57,13 @@ const Login = (props) => {
         });
         history.push('/home');
       } else {
-        alert('Password or email is incorrect')
+        toast({
+          title: "Login Failed!",
+          description: "Try again foo!",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
       }
     });
   };

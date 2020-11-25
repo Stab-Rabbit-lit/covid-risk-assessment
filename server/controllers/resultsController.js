@@ -1,4 +1,4 @@
-const db = require('../dbModels.js');
+const db = require("../dbModels.js");
 
 const resultsController = {};
 
@@ -28,26 +28,26 @@ const riskFactor = {
   music: 5,
   religious: 5,
   bar: 5,
-}
+};
 
 const risk = {
-  1: 'Low',
-  2: 'Moderate Low',
-  3: 'Moderate',
-  4: 'Moderate High',
-  5: 'High',
-}
+  1: "Low",
+  2: "Moderate Low",
+  3: "Moderate",
+  4: "Moderate High",
+  5: "High",
+};
 
 resultsController.calculateRisk = (req, res, next) => {
   // algorithm for calculating risk goes here
-    // iterate over req.body.activities
-    // check if activity against our activity lookup object for the activity's risk value
-    // assign the activities to the risk
-    // assign maxNum to highest risk activity
+  // iterate over req.body.activities
+  // check if activity against our activity lookup object for the activity's risk value
+  // assign the activities to the risk
+  // assign maxNum to highest risk activity
 
   // if this activity, look in riskFactor object for its value
   // example: [mail, gas, grocery, hair, plane]
-  const { activities, date, email} = req.body;
+  const { activities, date, email } = req.body;
   let max = 0;
   let maxRisk;
   let maxArray;
@@ -71,44 +71,41 @@ resultsController.calculateRisk = (req, res, next) => {
 
   res.locals.activities = {
     riskLevel: maxRisk,
-    riskyActs: maxArray
-  }
+    riskyActs: maxArray,
+  };
 
   const stringActivities = JSON.stringify(maxArray);
 
-
   const addResultsQuery = `INSERT INTO results (date, risk, activities, user_id) VALUES ($1, $2, $3, (SELECT _id FROM users WHERE users.email = $4))`;
- const values = [date, maxRisk, stringActivities, email]
+  const values = [date, maxRisk, stringActivities, email];
 
-  db.query(addResultsQuery, values,(err, data)=> {
-    if(err) next(err);
+  db.query(addResultsQuery, values, (err, data) => {
+    if (err) next(err);
     else {
       return next();
     }
   });
 
   return next();
-}
+};
 
-  resultsController.getResults = (req, res, next) => {
-    const { email } = req.params;
-    console.log('email', email);
+resultsController.getResults = (req, res, next) => {
+  const { email } = req.params;
+  console.log("email", email);
 
   const getResultsQuery = `
   SELECT * FROM results WHERE user_id = (SELECT _id FROM users WHERE users.email = $1)
     `;
-    const values = [email];
+  const values = [email];
 
-
-  db.query(getResultsQuery, values,(err, data)=> {
-    if(err) next(err);
+  db.query(getResultsQuery, values, (err, data) => {
+    if (err) next(err);
     else {
-      console.log('data.rows', data.rows);
+      console.log("data.rows", data.rows);
       res.locals.userResults = data.rows;
       return next();
     }
-  })
-  };
+  });
+};
 
-
-  module.exports = resultsController;
+module.exports = resultsController;
