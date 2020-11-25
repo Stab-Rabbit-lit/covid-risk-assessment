@@ -92,9 +92,10 @@ resultsController.calculateRisk = (req, res, next) => {
 
   resultsController.getResults = (req, res, next) => {
     const { email } = req.params;
+    console.log('email', email);
 
   const getResultsQuery = `
-  SELECT * FROM results WHERE _id = (SELECT _id FROM users WHERE users.email = $1)
+  SELECT * FROM results WHERE user_id = (SELECT _id FROM users WHERE users.email = $1)
     `;
     const values = [email];
 
